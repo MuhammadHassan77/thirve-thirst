@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+    <title>Thrive Thirst | Dashboard</title>
+    <meta name="description" content="Thrive Thirst">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="icon" href="./assets/img/favicon.png" type="image/png">
+
+    <link href="./assets/css/style.css" rel="stylesheet" type="text/css">
+
+    <link href="./assets/css/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" type="text/css" href="./assets/css/custom.css">
+    <style>
+        @media screen and (max-width:576px) {
+            .custom-div {
+                display: block !important;
+                background-color: aqua !important;
+            }
+        }
+    </style>
+
+    <script src="./assets/js/jquery.min.js"></script>
+
+    <script>
+        let username = sessionStorage.getItem("username");
+        if (username == null || username == undefined) window.location.href = "./index.html";
+    </script>
+</head>
+
+<body id="tc_body" class="header-fixed header-mobile-fixed subheader-enabled aside-enabled aside-fixed"
+    style="padding-right: 0px;">
+    <!-- Paste this code after body tag -->
+    <div class="se-pre-con loadergif" aria-hidden="true">
+        <div class="pre-loader">
+            <img class="img-fluid" src="./assets/img/loadergif.gif" alt="loading">
+        </div>
+    </div>
+    <!-- pos header -->
+
+    <!-- go to top -->
+    <a class="goToTop d-none" >
+        <img src="./assets/img/goToTop.png" alt="" style="width: 40px;opacity: 0.6;">
+    </a>
+    <!-- go to top end -->
+
+    <header class="pos-header bg-white" aria-hidden="true">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-xl-4 col-lg-4 col-md-6">
+                    <div class="greeting-text align-items-center">
+                        <img src="./assets/img/favicon.png" class="img-fluid rotating" style="width:50px;" alt="Logo">
+                        <h3 class="card-label mb-0 font-weight-bold text-primary">
+                            WELCOME
+                        </h3>
+                        <h3 class="card-label mb-0 username"></h3>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-5 col-md-6 clock-main">
+                    <div class="clock">
+                        <div class="datetime-content">
+                            <ul>
+                                <li id="hours"></li>
+                                <li id="point1">:</li>
+                                <li id="min"></li>
+                                <li id="point">:</li>
+                                <li id="sec"></li>
+                            </ul>
+                        </div>
+                        <div class="datetime-content">
+                            <div id="Date">Thursday 1 April 2021</div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-3 col-md-12  order-lg-last order-second">
+                    <div class="topbar justify-content-end">
+                        <div class="dropdown">
+                            <div class="topbar-item" data-toggle="dropdown" data-display="static">
+                                <div class="btn btn-icon w-auto h-auto btn-clean d-flex align-items-center py-0">
+                                    <span class="symbol symbol-35 symbol-light-success">
+                                        <span class="symbol-label font-size-h5 ">
+                                            <svg width="20px" height="20px" viewBox="0 0 16 16"
+                                                class="bi bi-person-fill" fill="currentColor"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                    d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z">
+                                                </path>
+                                            </svg>
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="dropdown-menu dropdown-menu-right" style="min-width: 150px;">
+                                <a href="./POS.html" class="dropdown-item">
+                                    <span class="fa fa-store svg-icon-primary mr-2"></span>
+                                    Point Of Sale
+                                </a>
+                                <a href="./admin_pages/add_product.html" class="dropdown-item">
+                                    <span class="fa fa-cocktail svg-icon-primary mr-2"></span>
+                                    Add Product
+                                </a>
+                                <a href="./admin_pages/add_user.html" class="dropdown-item">
+                                    <span class="fa fa-user-plus svg-icon-primary mr-2"></span>
+                                    Add User
+                                </a>
+                                <a href="./admin_pages/add_category.html" class="dropdown-item">
+                                    <span class="fa fa-list-ul svg-icon-primary mr-2"></span>
+                                    Add Category
+                                </a>
+                                <a role="button" class="dropdown-item logOutBtn">
+                                    <span class="svg-icon svg-icon-xl svg-icon-primary mr-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="feather feather-power">
+                                            <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
+                                            <line x1="12" y1="2" x2="12" y2="12"></line>
+                                        </svg>
+                                    </span>
+                                    Logout
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="contentPOS" aria-hidden="true">
+
+        <div class="container-fluid">
+            <div class="row text-white">
+                <div class="col-sm-3 my-2">
+                    <div class="card card-custom bg-info">
+                        <div class="card-body">
+                            <h2>Total Orders</h2>
+                            <h4 class="totalOrders"></h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3 my-2">
+                    <div class="card card-custom bg-warning">
+                        <div class="card-body">
+                            <h2>Total Sale</h2>
+                            <h4 class="totalSale"></h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3 my-2">
+                    <div class="card card-custom bg-danger">
+                        <div class="card-body">
+                            <h2>Total Customers</h2>
+                            <h4 class="totalCustomers"></h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3 my-2">
+                    <div class="card card-custom bg-success">
+                        <div class="card-body">
+                            <h2>Total Items</h2>
+                            <h4 class="totalItems"></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card card-custom gutter-b bg-white border-0">
+                        <div class="card-body" style="flex-grow: 0 !important;">
+                            <div class="d-flex">
+                                <input type="search" class="form-control searchField col-12"
+                                    style="font-size: 1.2em !important;" placeholder="Search Product..." />
+                                <!-- <div class="col-6 d-flex">
+                                    <label class="switch mx-auto">
+                                        <input type="checkbox" id="toggleLargeRegular">
+                                        <span class="slider round"></span>
+                                    </label>
+                                    <div class="fa-2x w-25">
+                                        R / L
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="row pl-5 mb-2">
+                            <h3>Product's Table</h3>
+                        </div>
+                        <div class="product-items">
+                            <div class="row">
+                                <table class="table dataTableProduct">
+                                    <thead>
+                                        <tr>
+                                            <th>Product Name</th>
+                                            <th>Product Category</th>
+                                            <th>Price</th>
+                                            <th>Status</th>
+                                            <th>Edit</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- DATA WLL BE SHOWN BY JQUERY -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 d-none">
+                    <div class="card card-custom gutter-b bg-white border-0">
+                        <div class="card-body" style="flex-grow: 0 !important;">
+                            <div class="d-flex">
+                                <input type="search" class="form-control searchField col-12 d-none"
+                                    style="font-size: 1.2em !important;" placeholder="Search Product..." />
+                            </div>
+                        </div>
+                        <div class="row pl-5 mb-2 mt-5">
+                            <h3>Store's Table</h3>
+                        </div>
+                        <div class="product-items">
+                            <div class="row">
+                                <table class="table dataTableStore">
+                                    <thead>
+                                        <tr>
+                                            <th>Store Name</th>
+                                            <th>Store Location</th>
+                                            <th>Store Status</th>
+                                            <th>Edit</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- STORES DATA WILL BE DISPLAYED BY JQUERY -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade text-left show" id="edit-product-popup" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel11" style="display: none; padding-right: 17px;" aria-modal="true">
+        <div class="modal-dialog modal-dialog-scrollable  modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="myModalLabel11">
+                        <i class="fa fa-edit mx-2"></i>Edit Product
+                    </h3>
+                    <button type="button" class="close rounded-pill btn btn-sm btn-icon btn-light btn-hover-primary m-0"
+                        data-dismiss="modal" aria-label="Close">
+                        <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="modalNotify"></div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <label class="text-body">Product Name</label>
+                                <div class="form-group mb-3">
+                                    <input type="hidden" class="pro_id" />
+                                    <input type="text" class="form-control pro_name" name="pro_name" value=""
+                                        placeholder="Product Name..">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="text-body">Product price</label>
+                                <div class="form-group mb-3">
+                                    <input type="number" class="form-control pro_price" name="pro_price" value=""
+                                        min='0'>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="text-body">Product Category</label>
+                                <select id="pCat" class="custom-select pro_cat" name="pro_cat"></select>
+                            </div>
+                            <div class="col-md-12 mt-3">
+                                <label class="text-body">Product Status</label> <br>
+                                <label class="text-body pro_status"></label>
+                                <div class="form-group my-3">
+                                    <label class="text-body fa-lg" for="active">Active</label>
+                                    <input type="radio" name="pro_status" class="Active" value="active">
+                                    <label class="text-body fa-lg" for="in-active">In-Active</label>
+                                    <input type="radio" name="pro_status" class="In-Active" value="in-active">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-primary editProductBtn">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade text-left show" id="edit-store-popup" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel11" style="display: none; padding-right: 17px;" aria-modal="true">
+        <div class="modal-dialog modal-dialog-scrollable  modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="myModalLabel11">
+                        <i class="fa fa-edit mx-2"></i>Edit Store
+                    </h3>
+                    <button type="button" class="close rounded-pill btn btn-sm btn-icon btn-light btn-hover-primary m-0"
+                        data-dismiss="modal" aria-label="Close">
+                        <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="modalNotify1"></div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group row">
+                            <!-- <div class="col-md-12">
+                                <label class="text-body">Store's Name</label>
+                                <div class="form-group mb-3">
+                                    <input type="text" class="form-control store_name" placeholder="Store's Name..">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="text-body">Store's Location</label>
+                                <div class="form-group mb-3">
+                                    <input type="text" class="form-control store_location"
+                                        placeholder="Store's Location">
+                                </div>
+                            </div> -->
+                            <div class="col-md-12 mt-3">
+                                <label class="text-body">Store's Status</label> <br>
+                                <input type="hidden" class="store_id">
+                                <div class="form-group my-3 storeRadio">
+                                    <label class="text-body fa-lg" for="active">Active</label>
+                                    <input type="radio" name="store_status" class="Active" value="active">
+                                    <label class="text-body fa-lg" for="in-active">In-Active</label>
+                                    <input type="radio" name="store_status" class="In-Active" value="in-active">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-primary editstoreBtn">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./assets/js/bootstrap.bundle.min.js" aria-hidden="true"></script>
+    <script src="./assets/js/custom.js" aria-hidden="true"></script>
+    <script>
+        $(document).ready(() => {
+            let username = sessionStorage.getItem("username");
+            (username != "undefined" && username != "") ? username = username : username = "";
+            $(".username").text(username);
+            $(".1stAlphabet").text((username) ? username.substr(0, 1) : username);
+
+            // let role = sessionStorage.getItem("role");
+
+            let storeId = sessionStorage.getItem("storeId");
+
+            // FETCHING PRODUCTS FOR SPDIFIC STORE ID
+            $.ajax({
+                url: `https://api-thrive-thirst.000webhostapp.com/Dashboard.php?action=getproductsfordashboard&query=${storeId}`,
+                dataType: "json",
+                cache: false,
+                success: (data) => {
+                    data['result'].map((data) => {
+                        // data['products'].map((val) => { console.log(val) })
+
+                        data['products'].map((val) => {
+                            // console.log(val)
+                            $(".dataTableProduct tbody").append(`
+                                    <tr>
+                                        <input type="hidden" class="p-details" p-id="${val['pid']}" p-name="${val['pname']}" p-price="${val['pprice']}" p-cat="${val['cname']}" p-status="${val['status']}">
+                                        <td class='pname'>${val['pname']}</td>
+                                        <td class='catname'>${val['cname']}</td>
+                                        <td>${val['pprice']}</td>
+                                        <td>
+                                           <h6 class="badge-${val['status'] == 'active' ? 'success' : 'danger'}" style="width:fit-content;padding: 5px;border-radius: 2rem;font-size: 1.1em;">
+                                            ${val['status']}
+                                            </h6>
+                                        </td>
+                                        <td>
+                                            <a class="editProduct p-2 rounded-pill" role="button" data-toggle="modal" data-target="#edit-product-popup" style="background: radial-gradient(transparent,#c0c0c0);">
+                                                <i class="fa fa-wrench"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    `);
+                        })
+
+                        data['categories'].map((category) => $("#pCat").append(`<option value="${category['cid']}">${category['cname']}</option>`))
+                    })
+                },
+                complete: function () {
+                    $('.loadergif').hide();
+                    // console.clear()
+                },
+                error: (err) => {
+                    console.log(err)
+                    $(".product-items .row").html(`<div><h1>OOPS!! Something Went Wrong!!!</h1></div>`);
+                }
+            })
+
+            // FETCHING ANALYTICS 
+            $.ajax({
+                url: `https://api-thrive-thirst.000webhostapp.com/Dashboard.php?action=getdashboardstatistics&query=${storeId}`,
+                dataType: "json",
+                cache: false,
+                success: (data) => {
+                    $(".totalOrders").text(data['result']['statistics'][0]['TotalOrders']);
+                    $(".totalSale").text(data['result']['statistics'][0]['TotalSales']);
+                    $(".totalCustomers").text(data['result']['statistics'][0]['TotalCustomer']);
+                    $(".totalItems").text(data['result']['statistics'][0]['TotalItems']);
+
+                },
+                error: (err) => {
+                    console.log(err)
+                    $(".totalOrders").text("N/A");
+                    $(".totalSale").text("N/A");
+                    $(".totalCustomers").text("N/A");
+                    $(".totalItems").text("N/A");
+                }
+            })
+
+            // LOADING PRODUCT DATA IN EDIT PRODUCT MODAL
+            $(document).on("click", ".editProduct", function () {
+                let pId = $(this).parent().parent().find('.p-details').attr('p-id');
+                let pName = $(this).parent().parent().find('.p-details').attr('p-name');
+                let pPrice = $(this).parent().parent().find('.p-details').attr('p-price');
+                let pCat = $(this).parent().parent().find('.p-details').attr('p-cat').replace(' ', '-');
+                let pStatus = $(this).parent().parent().find('.p-details').attr('p-status');
+
+                $("#pCat option").each(function (i, ele) {
+                    $(ele).removeAttr("selected");
+                    (($(ele).text().replace(' ', '-').indexOf(pCat) > -1 == true) ? $(ele).attr("selected", "true") : $(ele).removeAttr("selected"));
+                })
+                // console.log(pName, pCat, pStatus);
+
+                $(".pro_id").val(pId);
+                $(".pro_name").val(pName);
+                $(".pro_price").val(pPrice);
+                $(".pro_status").html(
+                    (pStatus == "active")
+                        ? `Current Status : <span class="badge badge-success ml-3">Active</span>`
+                        : `Current Status : <span class="badge badge-danger ml-3">In-Active</span>`
+                );
+                ($("input[name='pro_status']").val() == pStatus)
+                    ? $("input.Active").attr('checked', 'checked') : $("input.In-Active").attr('checked', 'checked');
+
+            })
+
+            // HANDLING EDIT PRODUCT SUBMIT BUTTTON
+            $(document).on("click", ".editProductBtn", function (e) {
+                e.preventDefault();
+                let pro_id = $(".pro_id").val().trim();
+                let pro_name = $(".pro_name").val().trim();
+                let pro_price = $(".pro_price").val().trim();
+                let pro_cat = $(".pro_cat").val();
+                let pro_status = $("input[checked='checked']").val();
+                console.log(pro_id, pro_name, pro_price, pro_cat, pro_status)
+                if (pro_name == '' || pro_price == '' || pro_cat == '' || pro_status == '') {
+                    $('.modalNotify').html(`
+                        <div class= "alert alert-danger alert-dismissible fade show" role = "alert" style = "font-size:1.2em" >
+                        <strong>All Fields</strong> are Required.
+                        <button type = "button" class= "close" data-dismiss="alert" aria - label="Close" >
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    `);
+                } else {
+                    $.ajax({
+                        url: `https://api-thrive-thirst.000webhostapp.com/Products.php?action=updateproduct&query=${pro_id}|${pro_name}|${pro_price}|${pro_status}|${pro_cat}`,
+                        cache: false,
+                        success: (data) => {
+                            if (data['result']['message'] == "Product updated successfully!") {
+                                $('.modalNotify').html(`
+                                        <div class= "alert alert-success alert-dismissible fade show" role = "alert" style = "font-size:1.2em" >
+                                        <strong>Product Updated</strong> Successfully! .
+                                        <button type = "button" class= "close" data-dismiss="alert" aria - label="Close" >
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    `);
+                                setTimeout(() => {
+                                    $("button[data-dismiss='modal']").trigger("click");
+                                    location.reload();
+                                }, 2000);
+                            }
+                            else {
+                                $('.modalNotify').html(`
+                                        <div class= "alert alert-danger alert-dismissible fade show" role = "alert" style = "font-size:1.2em" >
+                                        <strong>Something Went</strong> Wrong! .
+                                        <button type = "button" class= "close" data-dismiss="alert" aria - label="Close" >
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    `);
+                            }
+
+                        }, error: (err) => console.log("err ==> ", err)
+                    })
+                }
+            })
+
+            // HANDLING SEARCH FIELD
+            $("input.searchField").on("keyup", function (e) {
+                let searchInput = e.target.value.trim().toLowerCase();
+                $('.dataTableProduct tbody tr').filter(function () {
+                    let p_name = $(this).find(".pname").text().toLowerCase();
+                    $(this).toggle(p_name.indexOf(searchInput) > -1);
+
+                    // let catname = $(this).find(".catname").text().toLowerCase();
+                    // catname = catname.replace(" ", "-");
+                    // ($(this).toggle(catname.indexOf(searchInput) > -1));
+                })
+            })
+
+            //  CURRNT TIME FUNCTION
+            setInterval(() => {
+                // $("#hours").text(parseInt(Date().substr(16, 2)) > 12 ? (parseInt(Date().substr(16, 2)) % 12) + ":" + Date().substr(19, 5) : Date().substr(16, 2))
+                // let hours = parseInt(Date().substr(16, 2)) > 12 ? (parseInt(Date().substr(16, 2)) % 12) : Date().substr(16, 2);
+                // $("#hours").text(hours);
+                $("#hours").text(Date().substr(16, 2));
+                $("#min").text(Date().substr(19, 2));
+                $("#sec").text((Date().substr(22, 2)));
+                // $("#AMPM").text((hours > 12) ? "AM" : "PM");
+
+                let day = Date().substr(0, 3);
+                if (day == "Mon") day = "Monday"
+                else if (day == "Tue") day = "Tuesday"
+                else if (day == "Wed") day = "Wednesday"
+                else if (day == "Thu") day = "Thursday"
+                else if (day == "Fri") day = "Friday"
+                else if (day == "Sat") day = "Saturday"
+                else if (day == "Sun") day = "Sunday"
+                $("#Date").text(day + Date().substr(3, 12));
+            }, 1000);
+
+            $(".goToTop").click(function () {
+                $(document).scrollTop(0);
+            })
+
+        })
+    </script>
+
+</html>

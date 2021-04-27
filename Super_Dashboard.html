@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Thrive Thirst | Dashboard</title>
+    <meta name="description" content="Thrive Thirst">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="icon" href="./assets/img/favicon.png" type="image/png">
+
+    <link href="./assets/css/style.css" rel="stylesheet" type="text/css">
+
+    <link href="./assets/css/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" type="text/css" href="./assets/css/custom.css">
+
+    <script src="./assets/js/jquery.min.js"></script>
+
+    <script>
+        let username = sessionStorage.getItem("username");
+        if (username == null || username == undefined) window.location.href = "./index.html";
+    </script>
+</head>
+
+<body id="tc_body"
+    class="header-fixed header-mobile-fixed subheader-enabled aside-enabled aside-fixed pace-done pace-done">
+    <div class="pace  pace-inactive pace-inactive">
+        <div class="pace-progress" data-progress-text="100%" data-progress="99"
+            style="transform: translate3d(100%, 0px, 0px);">
+            <div class="pace-progress-inner"></div>
+        </div>
+        <div class="pace-activity"></div>
+    </div>
+    <!-- Paste this code after body tag -->
+    <div class="se-pre-con" style="display: none;">
+        <div class="pre-loader">
+            <img class="img-fluid" src="./assets/img/loadergif.gif" alt="loading">
+        </div>
+    </div>
+    <!--begin::Header Mobile-->
+    <div id="tc_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
+        <!--begin::Logo-->
+        <a href="" class="brand-logo">
+            <span class="brand-text"><img style="height: 25px;" alt="Logo" src="./assets/img/favicon.png"></span>
+        </a>
+        <!--end::Logo-->
+        <!--begin::Toolbar-->
+        <div class="d-flex align-items-center">
+
+            <button class="btn p-0" id="tc_aside_mobile_toggle">
+                <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-justify-right" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M6 12.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-4-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z">
+                    </path>
+                </svg>
+            </button>
+
+            <button class="btn p-0 ml-2" id="tc_header_mobile_topbar_toggle">
+                <span class="svg-icon svg-icon-xl">
+                    <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-person-fill" fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path>
+                    </svg>
+                </span>
+            </button>
+
+        </div>
+        <!--end::Toolbar-->
+    </div>
+    <!--end::Header Mobile-->
+    <!--begin::Main-->
+    <div class="d-flex flex-column flex-root">
+        <!--begin::Page-->
+        <div class="d-flex flex-row flex-column-fluid page">
+            <div>
+                <div class="aside aside-left aside-fixed d-flex flex-column flex-row-auto" id="tc_aside">
+                    <!--begin::Brand-->
+                    <div class="brand flex-column-auto" id="tc_brand">
+                        <!--begin::Logo-->
+                        <a href="" class="brand-logo">
+                            <img class="brand-image" style="height: 25px;" alt="Logo" src="assets/img/favicon.png">
+                            <span class="brand-text">
+                                <img style="height: 25px;" alt="Logo" src="assets/img/favicon.png">
+                                <!-- Thrive Thirst -->
+                            </span>
+                        </a>
+                        <!--end::Logo-->
+                    </div>
+                    <!--end::Brand-->
+                    <!--begin::Aside Menu-->
+                    <div class="aside-menu-wrapper flex-column-fluid overflow-auto h-100" id="tc_aside_menu_wrapper">
+                        <!--begin::Menu Container-->
+                        <div id="tc_aside_menu" class="aside-menu  mb-5" data-menu-vertical="1" data-menu-scroll="1"
+                            data-menu-dropdown-timeout="500">
+                            <!--begin::Menu Nav-->
+                            <div id="accordion">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item active">
+                                        <a href="" class="nav-link">
+                                            <span class="svg-icon nav-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="feather feather-home">
+                                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                                                </svg>
+                                            </span>
+                                            <span class="nav-text">
+                                                Dashboard
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="./POS.html">
+                                            <i class="svg-icon nav-icon fa fa-store-alt fa-lg"></i>
+                                            <span class="nav-text">POS</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <!-- <a class="nav-link" data-toggle="collapse" href="./superadmin_pages/add_product.html"
+                                            data-target="#media" role="button" aria-expanded="false"
+                                            aria-controls="media"> -->
+                                        <a class="nav-link" href="./superadmin_pages/add_product.html">
+                                            <i class="svg-icon nav-icon fa fa-cocktail fa-lg"></i>
+                                            <span class="nav-text">Products</span>
+                                        </a>
+                                        <!-- <div class="collapse nav-collapse" id="media" data-parent="#accordion">
+                                            <ul class="nav flex-column">
+                                                <li class="nav-item">
+                                                    <a href="media-manage.html" class="nav-link sub-nav-link">
+                                                        <span class="svg-icon nav-icon d-flex justify-content-center">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="10px"
+                                                                height="10px" fill="currentColor" class="bi bi-circle"
+                                                                viewBox="0 0 16 16">
+                                                                <path fill-rule="evenodd"
+                                                                    d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z">
+                                                                </path>
+                                                            </svg>
+                                                        </span>
+                                                        <span class="nav-text">Add products</span>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="media-detail.html" class="nav-link sub-nav-link">
+                                                        <span class="svg-icon nav-icon d-flex justify-content-center">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="10px"
+                                                                height="10px" fill="currentColor" class="bi bi-circle"
+                                                                viewBox="0 0 16 16">
+                                                                <path fill-rule="evenodd"
+                                                                    d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z">
+                                                                </path>
+                                                            </svg>
+                                                        </span>
+                                                        <span class="nav-text">Update Products</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div> -->
+                                    </li>
+                                    <li class="nav-item">
+                                        <!-- <a class="nav-link" data-toggle="collapse"
+                                            href="./superadmin_pages/add_category.html" data-target="#catalog" role="button"
+                                            aria-expanded="false" aria-controls="catalog"> -->
+                                        <a class="nav-link" href="./superadmin_pages/add_category.html">
+                                            <span class="svg-icon nav-icon">
+                                                <i class="fas fa-boxes font-size-h4"></i>
+                                            </span>
+                                            <span class="nav-text">Categories</span>
+                                            <!-- <i class="fas fa-chevron-right fa-rotate-90"></i> -->
+                                        </a>
+                                        <!-- <div class="collapse nav-collapse" id="catalog" data-parent="#accordion">
+                                            <div id="accordion1">
+                                                <ul class="nav flex-column">
+                                                    <li class="nav-item">
+                                                        <a href="product-units-list.html" class="nav-link sub-nav-link">
+                                                            <span
+                                                                class="svg-icon nav-icon d-flex justify-content-center">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="10px"
+                                                                    height="10px" fill="currentColor"
+                                                                    class="bi bi-circle" viewBox="0 0 16 16">
+                                                                    <path fill-rule="evenodd"
+                                                                        d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z">
+                                                                    </path>
+                                                                </svg>
+                                                            </span>
+                                                            <span class="nav-text">Add Category</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a href="product-variation-list.html"
+                                                            class="nav-link sub-nav-link">
+                                                            <span
+                                                                class="svg-icon nav-icon d-flex justify-content-center">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="10px"
+                                                                    height="10px" fill="currentColor"
+                                                                    class="bi bi-circle" viewBox="0 0 16 16">
+                                                                    <path fill-rule="evenodd"
+                                                                        d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z">
+                                                                    </path>
+                                                                </svg>
+                                                            </span>
+                                                            <span class="nav-text">Update Category</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div> -->
+                                    </li>
+                                    <li class="nav-item">
+                                        <!-- <a class="nav-link" data-toggle="collapse" href="./superadmin_pages/add_user.html"
+                                            role="button" aria-expanded="false" aria-controls="People"> -->
+                                        <a class="nav-link" href="./superadmin_pages/add_user.html">
+                                            <span class="svg-icon nav-icon">
+                                                <i class="fas fa-user-alt font-size-h4"></i>
+                                            </span>
+                                            <span class="nav-text">Users</span>
+                                            <!-- <i class="fas fa-chevron-right fa-rotate-90"></i> -->
+                                        </a>
+                                        <!-- <div class="collapse nav-collapse" id="People" data-parent="#accordion">
+                                            <div id="accordion2">
+                                                <ul class="nav flex-column">
+                                                    <li class="nav-item">
+                                                        <a href="billers-list.html" class="nav-link sub-nav-link">
+                                                            <span
+                                                                class="svg-icon nav-icon d-flex justify-content-center">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="10px"
+                                                                    height="10px" fill="currentColor"
+                                                                    class="bi bi-circle" viewBox="0 0 16 16">
+                                                                    <path fill-rule="evenodd"
+                                                                        d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z">
+                                                                    </path>
+                                                                </svg>
+                                                            </span>
+                                                            <span class="nav-text">Add User</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a href="supplier-list.html" class="nav-link sub-nav-link">
+                                                            <span
+                                                                class="svg-icon nav-icon d-flex justify-content-center">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="10px"
+                                                                    height="10px" fill="currentColor"
+                                                                    class="bi bi-circle" viewBox="0 0 16 16">
+                                                                    <path fill-rule="evenodd"
+                                                                        d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z">
+                                                                    </path>
+                                                                </svg>
+                                                            </span>
+                                                            <span class="nav-text">Update User</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div> -->
+                                    </li>
+                                    <li class="nav-item">
+                                        <!-- <a class="nav-link" data-toggle="collapse" href="./superadmin_pages/add_store.html"
+                                            role="button" aria-expanded="false" aria-controls="order"> -->
+                                        <a class="nav-link" href="./superadmin_pages/add_store.html">
+                                            <span class="svg-icon nav-icon">
+                                                <i class="fas fa-store font-size-h4"></i>
+                                            </span>
+                                            <span class="nav-text">Stores</span>
+                                            <!-- <i class="fas fa-chevron-right fa-rotate-90"></i> -->
+                                        </a>
+                                        <!-- <div class="collapse nav-collapse" id="order" data-parent="#accordion">
+                                            <ul class="nav flex-column">
+                                                <li class="nav-item">
+                                                    <a href="order-list.html" class="nav-link sub-nav-link">
+                                                        <span class="svg-icon nav-icon d-flex justify-content-center">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="10px"
+                                                                height="10px" fill="currentColor" class="bi bi-circle"
+                                                                viewBox="0 0 16 16">
+                                                                <path fill-rule="evenodd"
+                                                                    d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z">
+                                                                </path>
+                                                            </svg>
+                                                        </span>
+                                                        <span class="nav-text">Add store</span>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="order-detail.html" class="nav-link sub-nav-link">
+                                                        <span class="svg-icon nav-icon d-flex justify-content-center">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="10px"
+                                                                height="10px" fill="currentColor" class="bi bi-circle"
+                                                                viewBox="0 0 16 16">
+                                                                <path fill-rule="evenodd"
+                                                                    d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z">
+                                                                </path>
+                                                            </svg>
+                                                        </span>
+                                                        <span class="nav-text">Update Store</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div> -->
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--end::Menu Nav-->
+                        </div>
+                        <!--end::Menu Container-->
+                    </div>
+                    <!--end::Aside Menu-->
+                </div>
+            </div>
+            <!--begin::Aside-->
+
+            <div class="aside-overlay"></div>
+            <!--end::Aside-->
+            <!--begin::Wrapper-->
+            <div class="d-flex flex-column flex-row-fluid wrapper" id="tc_wrapper">
+                <!--begin::Header-->
+                <div id="tc_header" class="header header-fixed">
+                    <!--begin::Container-->
+                    <div class="container-fluid d-flex align-items-stretch justify-content-between">
+                        <!--begin::Header Menu Wrapper-->
+                        <div class="header-menu-wrapper header-menu-wrapper-left" id="tc_header_menu_wrapper">
+                            <!--begin::Header Menu-->
+                            <div id="tc_header_menu" class="header-menu header-menu-mobile header-menu-layout-default">
+                                <!--begin::Header Nav-->
+                                <ul class="menu-nav">
+                                    <li class="menu-item menu-item-open menu-item-here menu-item-submenu menu-item-rel menu-item-open menu-item-here menu-item-active p-0"
+                                        data-menu-toggle="click" aria-haspopup="true">
+                                        <!--begin::Toggle-->
+                                        <div class="btn  btn-clean btn-dropdown mr-0 p-0" id="tc_aside_toggle">
+                                            <span class="svg-icon svg-icon-xl svg-icon-primary">
+                                                <svg width="24px" height="24px" viewBox="0 0 16 16" class="bi bi-list"
+                                                    fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd"
+                                                        d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z">
+                                                    </path>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <!--end::Toolbar-->
+                                    </li>
+                                </ul>
+                                <!--end::Header Nav-->
+                            </div>
+                            <!--end::Header Menu-->
+                        </div>
+                        <!--end::Header Menu Wrapper-->
+
+                        <!--begin::Topbar-->
+                        <div class="topbar">
+                            <div class="topbar-item">
+                                <div class="quick-search quick-search-inline ml-20 mr-1 w-300px"
+                                    id="kt_quick_search_inline">
+                                    <!--begin::Dropdown-->
+                                    <div
+                                        class="dropdown-menu dropdown-menu-left dropdown-menu-lg dropdown-menu-anim-up">
+                                        <div class="quick-search-wrapper scroll ps" data-scroll="true" data-height="350"
+                                            data-mobile-height="200" style="height: 350px; overflow: hidden;">
+                                            <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
+                                                <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;">
+                                                </div>
+                                            </div>
+                                            <div class="ps__rail-y" style="top: 0px; right: 0px;">
+                                                <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end::Dropdown-->
+                                </div>
+                            </div>
+
+                            <!--begin::user-->
+                            <div class="dropdown">
+                                <div class="topbar-item" data-toggle="dropdown" data-display="static"
+                                    aria-expanded="false">
+                                    <div class="btn btn-icon w-auto btn-clean d-flex align-items-center pr-1 pl-3">
+                                        <span
+                                            class="text-dark-50 font-size-base d-none d-xl-inline mr-3 username">Doe</span>
+                                        <span class="symbol symbol-35 symbol-light-success">
+                                            <span class="symbol-label font-size-h5 ">
+                                                <svg width="20px" height="20px" viewBox="0 0 16 16"
+                                                    class="bi bi-person-fill" fill="currentColor"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd"
+                                                        d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z">
+                                                    </path>
+                                                </svg>
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="dropdown-menu dropdown-menu-right" style="min-width: 150px;">
+                                    <a role="button" class="dropdown-item logOutBtn">
+                                        <span class="svg-icon svg-icon-xl svg-icon-primary mr-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="feather feather-power">
+                                                <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
+                                                <line x1="12" y1="2" x2="12" y2="12"></line>
+                                            </svg>
+                                        </span>
+                                        Logout
+                                    </a>
+                                </div>
+
+                            </div>
+                            <!--end::user-->
+                        </div>
+                        <!--end::Topbar-->
+                    </div>
+                    <!--end::Container-->
+                </div>
+                <!--end::Header-->
+                <!--begin::Content-->
+                <div class="content d-flex flex-column flex-column-fluid" id="tc_content">
+                    <!--begin::Subheader-->
+                    <div class="subheader py-2 py-lg-6 subheader-solid">
+                        <div class="container-fluid">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb bg-white mb-0 px-0 py-2">
+                                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                    <!--end::Subheader-->
+                    <!--begin::Entry-->
+                    <div class="d-flex flex-column-fluid">
+                        <!--begin::Container-->
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-xl-3">
+                                            <div
+                                                class="card card-custom gutter-b bg-white border-0 theme-circle theme-circle-primary">
+                                                <div class="card-body">
+                                                    <h3 class="text-body font-weight-bold">Total Customers</h3>
+                                                    <div class="mt-3">
+                                                        <div class="d-flex align-items-center">
+                                                            <span class="text-dark font-weight-bold font-size-h1 mr-3">
+                                                                <span class="counter totalCustomers">400</span>
+                                                            </span>
+                                                        </div>
+                                                        <!-- <div class="text-black-50 mt-3">Compare to last year (2019)</div> -->
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-xl-3">
+                                            <div
+                                                class="card card-custom gutter-b bg-white border-0 theme-circle theme-circle theme-circle-secondary">
+                                                <div class="card-body">
+                                                    <h3 class="text-body font-weight-bold">Total Orders</h3>
+                                                    <div class="mt-3">
+                                                        <div class="d-flex align-items-center">
+                                                            <span class="text-dark font-weight-bold font-size-h1 mr-3">
+                                                                <span class="counter totalOrders">600</span>
+                                                            </span>
+                                                        </div>
+                                                        <!-- <div class="text-black-50 mt-3">Compare to last year (2019)</div> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-xl-3">
+                                            <div
+                                                class="card card-custom gutter-b bg-white border-0 theme-circle theme-circle-success">
+                                                <div class="card-body">
+                                                    <h3 class="text-body font-weight-bold">Total Items</h3>
+                                                    <div class="mt-3">
+                                                        <div class="d-flex align-items-center">
+                                                            <span class="text-dark font-weight-bold font-size-h1 mr-3">
+                                                                <span class="counter totalItems">1000</span>
+                                                            </span>
+                                                        </div>
+                                                        <!-- <div class="text-black-50 mt-3">Compare to last year (2019)</div> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-xl-3">
+                                            <div
+                                                class="card card-custom gutter-b bg-white border-0 theme-circle theme-circle-info">
+                                                <div class="card-body">
+                                                    <h3 class="text-body font-weight-bold">Total Sales</h3>
+                                                    <div class="mt-3">
+                                                        <div class="d-flex align-items-center">
+                                                            <span class="text-dark font-weight-bold mr-3">
+                                                                Rs:<span class="counter totalSale fa-3x">6800</span>
+                                                            </span>
+                                                        </div>
+                                                        <!-- <div class="text-black-50 mt-3">Compare to last year (2019)</div> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6  col-xl-6">
+                                            <div class="card card-custom gutter-b bg-white border-0">
+                                                <div class="card-header align-items-center  border-0">
+                                                    <div class="card-title mb-0">
+                                                        <h3 class="card-label text-body font-weight-bold mb-0">Customers
+                                                        </h3>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body pt-3" style="position: relative;">
+                                                    <div id="chart-4"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6  col-xl-6">
+                                            <div class="card card-custom gutter-b bg-white border-0">
+                                                <div class="card-header align-items-center  border-0">
+                                                    <div class="card-title mb-0">
+                                                        <h3 class="card-label text-body font-weight-bold mb-0">Users
+                                                        </h3>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body pt-3" style="position: relative;">
+                                                    <div id="chart-5"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6  col-xl-6">
+                                            <div class="card card-custom gutter-b bg-white border-0">
+                                                <div class="card-header align-items-center  border-0">
+                                                    <div class="card-title mb-0">
+                                                        <h3 class="card-label text-body font-weight-bold mb-0">Users
+                                                        </h3>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body pt-3" style="position: relative;">
+                                                    <div id="chart-6"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end::Wrapper-->
+        </div>
+        <!--end::Page-->
+    </div>
+    <!--end::Main-->
+
+    <script src="./assets/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/js/custom.js" aria-hidden="true"></script>
+
+    <script src="./assets/js/apexcharts.js"></script>
+    <script src="./assets/js/scriptcharts.js"></script>
+    <script src="./assets/js/script.bundle.js"></script>
+
+    <!-- <script src="./assets/js/pace.js"></script> -->
+    <!-- <script src="./assets/js/plugin.bundle.min.js"></script>
+    <script src="./assets/js/jqueryvalidate/jquery.validate.min.js"></script>
+    <script src="./assets/js/mcustomscrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="./assets/js/quill.min.js"></script>
+    <script src="./assets/js/datatable/jquery.dataTables.min.js"></script> -->
+
+    <script>
+        $(document).ready(function () {
+
+            if (username != null || username != undefined) $(".username").text(username);
+            // FETCHING ANALYTICS 
+            $.ajax({
+                url: `https://api-thrive-thirst.000webhostapp.com/Dashboard.php?action=getdashboardstatistics&query=-`,
+                dataType: "json",
+                cache: false,
+                success: (data) => {
+                    $(".totalOrders").text(data['result']['statistics'][0]['TotalOrders']);
+                    $(".totalSale").text(data['result']['statistics'][0]['TotalSales']);
+                    $(".totalCustomers").text(data['result']['statistics'][0]['TotalCustomer']);
+                    $(".totalItems").text(data['result']['statistics'][0]['TotalItems']);
+                },
+                error: (err) => {
+                    console.log(err)
+                    $(".totalOrders").text("N/A");
+                    $(".totalSale").text("N/A");
+                    $(".totalCustomers").text("N/A");
+                    $(".totalItems").text("N/A");
+                }
+            })
+
+        });
+    </script>
+    <script>
+        $('#tc_aside_toggle').on("click", function (e) {
+            $('body').toggleClass('aside-minimize');
+        });
+
+        $("#tc_aside").hover(function () {
+            $('body').toggleClass("aside-minimize-hover");
+        });
+
+        //Mobile Menu
+        $('#tc_aside_mobile_toggle').on('click', function () {
+
+            $('#tc_aside').toggleClass('aside-on');
+            $('.aside-overlay').addClass('active');
+        });
+
+        $('.aside-overlay').on('click', function () {
+            $('#tc_aside').removeClass('aside-on');
+            $('.aside-overlay').removeClass('active');
+        });
+    </script>
+</body>
+
+</html>

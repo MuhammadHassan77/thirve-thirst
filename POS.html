@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+	<title>POS | Thrive Thirst</title>
+	<meta name="description" content="Thrive Thirst">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link rel="icon" href="./assets/img/favicon.png" type="image/png">
+
+	<link href="./assets/css/style.css" rel="stylesheet" type="text/css">
+
+	<link href="./assets/css/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css">
+
+	<link rel="stylesheet" type="text/css" href="./assets/css/custom.css">
+
+	<script src="./assets/js/jquery.min.js"></script>
+
+	<script>
+		let username = sessionStorage.getItem("username");
+		if (username == null || username == undefined) window.location.href = "./index.html";
+	</script>
+</head>
+
+<body id="tc_body" class="header-fixed header-mobile-fixed subheader-enabled aside-enabled aside-fixed"
+	style="padding-right: 0px;">
+
+	<!-- Paste this code after body tag -->
+	<div class="se-pre-con loadergif" aria-hidden="true">
+		<div class="pre-loader">
+			<img class="img-fluid" src="./assets/img/loadergif.gif" alt="loading">
+		</div>
+	</div>
+	<!-- pos header -->
+
+	<!-- go to top -->
+	<a class="goToTop d-none">
+		<img src="./assets/img/goToTop.png" alt="" style="width: 40px;opacity: 0.6;">
+	</a>
+	<!-- go to top end -->
+
+	<header class="pos-header bg-white" aria-hidden="true">
+		<div class="container-fluid">
+			<div class="row align-items-center">
+				<div class="col-xl-4 col-lg-4 col-md-6">
+					<div class="greeting-text align-items-center">
+						<img src="./assets/img/favicon.png" class="img-fluid rotating" style="width:50px;" alt="Logo">
+						<h3 class="card-label mb-0 font-weight-bold text-primary">
+							WELCOME
+						</h3>
+						<h3 class="card-label mb-0 username"></h3>
+					</div>
+				</div>
+				<div class="col-xl-4 col-lg-5 col-md-6 clock-main">
+					<div class="clock">
+						<div class="datetime-content">
+							<ul>
+								<li id="hours">11</li>
+								<li id="point1">:</li>
+								<li id="min">07</li>
+								<li id="point">:</li>
+								<li id="sec">07</li>
+							</ul>
+						</div>
+						<div class="datetime-content">
+							<div id="Date">Thursday 1 April 2021</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-4 col-lg-3 col-md-12  order-lg-last order-second">
+					<div class="topbar justify-content-end">
+						<div class="dropdown">
+							<div class="topbar-item" data-toggle="dropdown" data-display="static">
+								<div class="btn btn-icon w-auto h-auto btn-clean d-flex align-items-center py-0">
+									<span class="symbol symbol-35 symbol-light-success">
+										<span class="symbol-label font-size-h5 ">
+											<svg width="20px" height="20px" viewBox="0 0 16 16"
+												class="bi bi-person-fill" fill="currentColor"
+												xmlns="http://www.w3.org/2000/svg">
+												<path fill-rule="evenodd"
+													d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z">
+												</path>
+											</svg>
+										</span>
+									</span>
+								</div>
+							</div>
+
+							<div class="dropdown-menu dropdown-menu-right" style="min-width: 150px;">
+								<a href="./.html" class="dropdown-item d-none">
+									<span class="fa fa-plus svg-icon-primary mr-2"></span>
+									Add Product & Category
+								</a>
+								<a role="button" class="dropdown-item logOutBtn">
+									<span class="svg-icon svg-icon-xl svg-icon-primary mr-2">
+										<svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px"
+											viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+											stroke-linecap="round" stroke-linejoin="round"
+											class="feather feather-power">
+											<path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
+											<line x1="12" y1="2" x2="12" y2="12"></line>
+										</svg>
+									</span>
+									Logout
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<div class="contentPOS" aria-hidden="true">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xl-8">
+					<div class="card card-custom gutter-b bg-white border-0">
+						<div class="card-body" style="flex-grow: 0 !important;">
+							<div class="d-flex">
+								<div class="col-8">
+									<input type="search" class="form-control searchProduct"
+										style="font-size: 1.2em !important;" placeholder="Search Product..." />
+								</div>
+								<div class="col-4 d-flex">
+									<label class="switch mx-auto">
+										<input type="checkbox" id="toggleLargeRegular">
+										<span class="slider round"></span>
+									</label>
+									<div class="fa-2x w-50">
+										R / L
+									</div>
+								</div>
+							</div>
+						</div>
+						<h1 class="text-muted w-100 text-center mb-2 custom-heading">Regular</h1>
+						<div class="row pl-5 filterTags mb-2"></div>
+						<div class="product-items">
+							<div class="row">
+								<!-- Product Cards Will be displayed by jQuery -->
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-4">
+					<div class="card card-custom gutter-b bg-white border-0">
+						<div class="card-body">
+							<div class="shop-profile">
+								<div class="media">
+									<div
+										class="bg-primary w-100px h-100px d-flex justify-content-center align-items-center">
+										<h2 class="mb-0 white 1stAlphabet"></h2>
+									</div>
+									<div class="media-body ml-3">
+										<h3 class="title font-weight-bold username"></h3>
+										<!-- <p class="phoonenumber">
+											022 22863745
+										</p> -->
+										<p class="adddress">
+											Shop #:02, Block C, Siddique Plaza, Unit# 08 Latifabad, Hyderabad
+										</p>
+										<p class="countryname">Pakistan</p>
+									</div>
+								</div>
+							</div>
+							<div class="mt-2 mb-5">
+								<label>Customer <i class="fa fa-plus text-warning ml-2 fa-lg" role="button"
+										data-toggle="modal" data-target="#add-customer-popup"></i> </label>
+								<select class="custom-select" id="registerCustomers">
+									<option value="walkin">Walk-In</option>
+								</select>
+							</div>
+							<div class="table-datapos overflow-auto POS_Table" style="height: 250px;">
+								<div class="table-responsive" id="printableTable">
+									<table id="orderTable" class="display"
+										style="width:100%;font-size:1.2em !important">
+										<thead>
+											<tr>
+												<th>Name</th>
+												<th>Quantity</th>
+												<th>Subtotal</th>
+												<th class=" text-right no-sort"></th>
+											</tr>
+										</thead>
+										<tbody>
+											<!-- tdies will be displayed by jquery -->
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="resulttable-pos"
+								style="padding-bottom: 0px !important;margin-bottom: 5px !important;">
+								<table class="table right-table">
+									<tbody>
+										<tr class="d-flex align-items-center justify-content-between">
+											<th class="border-0 font-size-h5 mb-0 font-size-bold text-dark"
+												style="font-size: 1.2em !important;">
+												Total Items
+											</th>
+											<td class="justify-content-end d-flex text-dark totalqty"
+												style="font-size: 2em !important;">
+												0
+											</td>
+										</tr>
+										<tr class="d-flex align-items-center justify-content-between">
+											<th class="border-0 ">
+												<div
+													class="d-flex align-items-center font-size-h5 mb-0 font-size-bold text-dark">
+													DISCOUNT
+													<i class="fa fa-plus text-warning ml-2 fa-lg" role="button"
+														data-toggle="modal" data-target="#discountpop"></i>
+												</div>
+											</th>
+											<td
+												class="border-0 justify-content-end d-flex text-dark font-size-base discountAmount">
+												Rs : 0
+											</td>
+										</tr>
+										<tr class="d-flex align-items-center justify-content-between item-price">
+											<th class="border-0 font-size-h5 mb-0 font-size-bold text-primary"
+												style="font-size: 1.2em !important;">
+												TOTAL
+											</th>
+											<td class="border-0 justify-content-end d-flex text-primary totalPrice"
+												style="font-size: 2em !important;">
+												Rs : 000
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="d-flex justify-content-end align-items-center flex-column">
+								<div>
+									<a role="button" class="btn btn-primary white mb-2" data-toggle="modal"
+										data-target="#payment-popup">
+										<i class="fas fa-money-bill-wave mr-2"></i>
+										Pay With Cash
+									</a>
+									<button type="submit" class="btn btn-secondary white mb-2 draftOrderBtn" disabled>
+										<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" style="width:15px"
+											class="bi bi-folder-fill svg-sm mr-2" viewBox="0 0 16 16">
+											<path
+												d="M9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.826a2 2 0 0 1-1.991-1.819l-.637-7a1.99 1.99 0 0 1 .342-1.31L.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3zm-8.322.12C1.72 3.042 1.95 3 2.19 3h5.396l-.707-.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139z">
+											</path>
+										</svg>
+										Draft Order
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- DIV FOR PRINT -->
+				<div class="col-4 d-none" id="Printable_Div">
+					<table class="table print_Table" style="border:1px solid black !important">
+						<thead>
+							<tr>
+								<td colspan="3"
+									style="text-align: center;font-size: 2.3em;text-shadow: -2px -2px black;">
+									<img src="./assets/img/favicon.png" style="width:50px;" alt="Logo">
+									<span style="display: flow-root;">Thrive Thirst</span>
+								</td>
+							</tr>
+							<tr>
+								<th>Name</th>
+								<td></td>
+								<td class="Store_Name"></td>
+							</tr>
+							<tr>
+								<th>Location</th>
+								<td></td>
+								<td class="Store_Location"></td>
+							</tr>
+							<tr>
+								<th class="Customer_Id"></th>
+								<td></td>
+								<th class="User_Id"></th>
+							</tr>
+						</thead>
+						<tbody class="order-details">
+							<tr>
+								<th>Name</th>
+								<th>Quantity</th>
+								<th>Subtotal</th>
+							</tr>
+							<!-- DATA WILL BE DISPLAYED BY JQUERY -->
+						</tbody>
+						<tfoot>
+							<tr>
+								<th>Total Items</th>
+								<td></td>
+								<td class="Total_Items"></td>
+							</tr>
+							<tr>
+								<th>Total Discount</th>
+								<td></td>
+								<td class="Total_Discount"></td>
+							</tr>
+							<tr>
+								<th>Billed Amount</th>
+								<td></td>
+								<td class="Billed_Amount"></td>
+							</tr>
+							<tr>
+								<th>Amount Recieved</th>
+								<td></td>
+								<td class="Amount_Recieved"></td>
+							</tr>
+							<tr>
+								<th>Change Returned</th>
+								<td></td>
+								<td class="Change_Returned"></td>
+							</tr>
+							<tr>
+								<td colspan="3"
+									style="font-size: 2.3em;text-shadow: -2px -2px black; text-align: center;">
+									Thank You !
+								</td>
+							</tr>
+							<!-- <tr>
+								<th colspan="3" style="text-align: center;">
+									Developed By : M.H.S Solution
+								</th>
+							</tr> -->
+						</tfoot>
+					</table>
+				</div>
+				<!-- DIV FOR PRINT END-->
+
+			</div>
+		</div>
+	</div>
+
+	<!-- ADD CUSTOMER MODAL -->
+	<div class="modal fade text-left" id="add-customer-popup" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel11" style="display: none; padding-right: 17px;" aria-modal="true">
+		<div class="modal-dialog modal-dialog-scrollable  modal-dialog-centered modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title" id="myModalLabel11">
+						<i class="fa fa-user-plus mx-2"></i>Add Customer
+					</h3>
+					<button type="button" class="close rounded-pill btn btn-sm btn-icon btn-light btn-hover-primary m-0"
+						data-dismiss="modal" aria-label="Close">
+						<svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor"
+							xmlns="http://www.w3.org/2000/svg">
+							<path fill-rule="evenodd"
+								d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z">
+							</path>
+						</svg>
+					</button>
+				</div>
+				<div class="modalNotify1"></div>
+				<div class="modal-body">
+					<form id="editFrom">
+						<div class="form-group row">
+							<div class="col-md-12">
+								<label class="text-body">Customer's Name</label>
+								<div class="form-group mb-3">
+									<input type="text" class="form-control customer_name" value=""
+										placeholder="Customer's Name..">
+								</div>
+							</div>
+							<!-- <div class="col-md-12 mt-3">
+								<label class="text-body">Store Name</label>
+								<select id="storeName" class="custom-select store_id"></select>
+							</div> -->
+						</div>
+						<div class="form-group row mb-0">
+							<div class="col-md-6">
+								<button type="submit" class="btn btn-primary addCustomerBtn">Submit</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- DISCOUNT MODAL -->
+	<div class="modal fade text-left " id="discountpop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel122"
+		style="display: none; padding-right: 17px;" aria-modal="true">
+		<div class="modal-dialog modal-dialog-scrollable  modal-dialog-centered modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title" id="myModalLabel122">Add Discount</h3>
+					<button type="button"
+						class="close rounded-pill btn btn-sm btn-icon btn-light btn-hover-primary m-0 closeModalBtn"
+						data-dismiss="modal" aria-label="Close">
+						<svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor"
+							xmlns="http://www.w3.org/2000/svg">
+							<path fill-rule="evenodd"
+								d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z">
+							</path>
+						</svg>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-12">
+							<label class="text-body">Discount</label>
+							<form class="form-group mb-3 d-flex">
+								<input type="number" id="discount_input" class="form-control bg-white dis_Amount"
+									placeholder="Enter Discount" required>
+								<button type="submit" disabled
+									class="btn-secondary btn ml-2 white pt-1 pb-1 d-flex align-items-center justify-content-center applyDiscountBtn">
+									Apply
+								</button>
+							</form>
+							<div class="p-3 bg-light-dark d-flex justify-content-between border-bottom">
+								<h5 class="font-size-bold mb-0">Discount Applied of:</h5>
+								<h5 class="font-size-bold mb-0 totalPrice">Rs : 0</h5>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- PAYMENT MODAL -->
+	<div class="modal fade text-left" id="payment-popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
+		style="display: none;" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-scrollable  modal-dialog-centered modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title" id="myModalLabel11">Payment</h3>
+					<button type="button" class="close rounded-pill btn btn-sm btn-icon btn-light btn-hover-primary m-0"
+						data-dismiss="modal" aria-label="Close">
+						<svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor"
+							xmlns="http://www.w3.org/2000/svg">
+							<path fill-rule="evenodd"
+								d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z">
+							</path>
+						</svg>
+					</button>
+				</div>
+				<div class="modalNotify2"></div>
+				<div class="modal-body">
+					<table class="table right-table" style="font-size: 1.2em !important;">
+						<tbody>
+							<tr class="d-flex align-items-center justify-content-between">
+								<th class="border-0 px-0 font-size-lg mb-0 font-size-bold text-primary">
+									Total Discount
+								</th>
+								<td
+									class="justify-content-end d-flex font-size-lg font-size-bold text-primary discountAmount">
+									Rs : 0
+								</td>
+							</tr>
+							<tr class="d-flex align-items-center justify-content-between">
+								<th class="border-0 px-0 font-size-lg mb-0 font-size-bold text-primary">
+									Total Amount to Pay :
+								</th>
+								<td
+									class="justify-content-end d-flex font-size-lg font-size-bold text-primary grandTotal">
+									Rs : 000
+								</td>
+							</tr>
+							<tr class="d-flex align-items-center justify-content-between">
+								<th class="border-0 px-0 font-size-lg mb-0 font-size-bold text-primary">
+									Payment Mode :
+								</th>
+								<td
+									class="border-0 justify-content-end d-flex text-primary font-size-lg font-size-bold px-0 font-size-lg mb-0 font-size-bold text-primary">
+									Cash
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<form>
+						<div class="form-group row">
+							<div class="col-md-12">
+								<label class="text-body">Received Amount</label>
+								<fieldset class="form-group mb-3">
+									<input type="number" class="form-control recievedAmount" value="" min="0" autofocus
+										placeholder="Enter Amount...">
+								</fieldset>
+								<div class="p-3 bg-light-dark d-flex justify-content-between border-bottom">
+									<h5 class="font-size-bold mb-0">Amount to Return :</h5>
+									<h5 class="font-size-bold mb-0 amountToReturn"></h5>
+								</div>
+							</div>
+						</div>
+						<div class="form-group row justify-content-end mb-0">
+							<div class="col-md-6  text-right">
+								<button type="submit" class="btn btn-primary placeOrderBtn" disabled>Submit</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="./assets/js/bootstrap.bundle.min.js" aria-hidden="true"></script>
+	<script src="./assets/js/custom.js" aria-hidden="true"></script>
+	<script>
+
+		$(document).ready(() => {
+
+			let storeId = sessionStorage.getItem("storeId");
+			let storeName = sessionStorage.getItem("storeName");
+			let storeLocation = sessionStorage.getItem("location");
+			$(".adddress").text(storeName + ", " + storeLocation);
+
+			// SCROLLING TO TOP
+			$(".goToTop").click(() => $(document).scrollTop(0))
+
+			function getRegisterdCustomers() {
+				//get customer in store (query = type(registered/walkin)|storeid)
+				$.ajax({
+					url: `https://api-thrive-thirst.000webhostapp.com/Customers.php?action=getcustomer&query=registered|${storeId}`,
+					cache: false,
+					success: (data) => {
+						// console.log(data);
+						(data['result']['message'] == "No customer in this store with this status") ? ""
+							: data['result']['customers'].map((customer) => {
+								$("#registerCustomers").append(`<option value="${customer['customerid']}">${customer['customername']}</option>`);
+							})
+
+					},
+					error: (err) => {
+
+					}
+				})
+			}
+
+			//  CURRNT TIME FUNCTION
+			setInterval(() => {
+				// $("#hours").text(parseInt(Date().substr(16, 2)) > 12 ? (parseInt(Date().substr(16, 2)) % 12) + ":" + Date().substr(19, 5) : Date().substr(16, 2))
+				// let hours = parseInt(Date().substr(16, 2)) > 12 ? (parseInt(Date().substr(16, 2)) % 12) : Date().substr(16, 2);
+				// $("#hours").text(hours);
+				$("#hours").text(Date().substr(16, 2));
+				$("#min").text(Date().substr(19, 2));
+				$("#sec").text((Date().substr(22, 2)));
+				// $("#AMPM").text((hours > 12) ? "AM" : "PM");
+
+				let day = Date().substr(0, 3);
+				if (day == "Mon") day = "Monday"
+				else if (day == "Tue") day = "Tuesday"
+				else if (day == "Wed") day = "Wednesday"
+				else if (day == "Thu") day = "Thursday"
+				else if (day == "Fri") day = "Friday"
+				else if (day == "Sat") day = "Saturday"
+				else if (day == "Sun") day = "Sunday"
+				$("#Date").text(day + Date().substr(3, 12));
+			}, 1000);
+
+			// FETCHING PRODUCTS FROM API HANDLIN
+			setTimeout(() => {
+				$.ajax({
+					url: `https://api-thrive-thirst.000webhostapp.com/Products.php?action=getproducts&query=${storeId}`,
+					cache: false,
+					success: (data) => {
+						let categories = data['result']['products'][0]
+						for (let category in categories) {
+							$('.product-items .row').append(`<h2 class="w-100 mb-2" id="${category.replace(" ", "-")}">${category}</h2>`);
+							$('.filterTags').append(`<a href="#${category.replace(" ", "-")}" class="custom-tags text-decoration-none" role="button">${category}</a>`);
+							categories[category].map((val) => {
+								if (val['pname'].search("Large") != -1) {
+									$('div.product-items div.row ').append
+										(`
+									<div class="col-xl-3 col-lg-2 col-md-3 col-sm-4 col-6 product large d-none" role="button">
+										<input type="hidden" class="p-details" p-price="${val['pprice']}" p-id="${val['pid']}"
+											p-name="${val['pname']}" p-category="${category}">
+										<div class="productCard">
+											<div class="productThumb">
+												<img class="img-fluid" src="./assets/img/P_01.jpg">
+											</div>
+											<div class="productContent d-flex">
+												<a role="button" class="w-50">
+													${val['pname']}
+												</a>
+												<a role="button" class="w-50 text-center">
+													Rs: ${val['pprice']}
+												</a>
+											</div>
+										</div>
+									</div>
+									`);
+								} else {
+									$('div.product-items div.row ').append
+										(`
+									<div class="col-xl-3 col-lg-2 col-md-3 col-sm-4 col-6 product regular" role="button">
+										<input type="hidden" class="p-details" p-price="${val['pprice']}" p-id="${val['pid']}"
+											p-name="${val['pname']}" p-category="${category}">
+										<div class="productCard">
+											<div class="productThumb">
+												<img class="img-fluid" src="./assets/img/P_01.jpg">
+											</div>
+											<div class="productContent d-flex">
+												<a role="button" class="w-50">
+													${val['pname']}
+												</a>
+												<a role="button" class="w-50 text-center">
+													Rs: ${val['pprice']}
+												</a>
+											</div>
+										</div>
+									</div>
+									`);
+								}
+							})
+						}
+					},
+					complete: function () {
+						$('.loadergif').hide();
+					},
+					error: (err) => {
+						console.log(err)
+						$(".product-items .row").html(`
+						<div><h1>OOPS!! Something Went Wrong!!!</h1></div>
+						`)
+					}
+				})
+				getRegisterdCustomers();
+			}, 100);
+
+			//  HANDLIN ADD CUSTOMER BUTTON
+			$(document).on("click keydown", ".addCustomerBtn", function (e) {
+				e.preventDefault();
+				let customer_name = $(".customer_name").val().trim();
+				console.log(customer_name, storeId);
+				if (customer_name == "" || storeId == "") {
+					$('.modalNotify1').html(`
+				<div class= "alert alert-danger alert-dismissible fade show" role = "alert" style = "font-size:1.2em" >
+				<strong>All Fields</strong> are Required.
+				<button type = "button" class= "close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			`);
+				} else {
+					$.ajax({
+						url: `https://api-thrive-thirst.000webhostapp.com/Customers.php?action=addcustomer&query=${customer_name}|registered|${storeId}`,
+						cache: false,
+						success: (data) => {
+							if (data['result']['message'] == "Customer added successfully!") {
+								$('.modalNotify1').html(`
+							    <div class= "alert alert-success alert-dismissible fade show" role = "alert" style = "font-size:1.2em" >
+							    <strong>Customer Added</strong> Successfully!
+							    <button type = "button" class= "close" data-dismiss="alert" aria-label="Close" >
+							        <span aria-hidden="true">&times;</span>
+							    </button>
+							`);
+								$(".customer_name").val("");
+							} else {
+								$('.modalNotify1').html(`
+							    <div class= "alert alert-danger alert-dismissible fade show" role = "alert" style = "font-size:1.2em" >
+							    <strong>Something Went</strong> Wrong!
+							    <button type = "button" class= "close" data-dismiss="alert" aria-label="Close" >
+							        <span aria-hidden="true">&times;</span>
+							    </button>
+							`);
+							}
+						},
+						error: (err) => console.log("err ==>", err)
+					})
+				}
+			})
+
+			//  HANDLIN DISCOUTN BUTTON
+			$(document).on("keyup", "#discount_input", function () {
+				let totalPrice = parseInt(document.getElementsByClassName("totalPrice")[0].innerText.substr(4));
+				let discount = parseInt($(this).val());
+				if (discount !== 0) (discount <= totalPrice) ? $(".applyDiscountBtn").removeAttr('disabled') : $(".applyDiscountBtn").attr('disabled', 'disabled');
+				// console.log(discount, totalPrice);
+			})
+
+			//  HANDLIN DISCOUTN BUTTON
+			$(document).on("click keydown", ".applyDiscountBtn", function (e) {
+				e.preventDefault();
+				let dis_amount = $(".dis_Amount").val().trim();
+				if (dis_amount == "") {
+
+				} else {
+					$(".discountAmount").text("Rs : " + dis_amount);
+					$(".closeModalBtn").trigger("click");
+					GetTotal()
+				}
+				$(".dis_Amount").val(0);
+			})
+
+			//  HANDLIN PLACE ORDER BUTTON 
+			$(document).on("click keydown", ".placeOrderBtn", function (e) {
+				e.preventDefault();
+				let customerId = $("#registerCustomers").val().trim();
+				let storeId = sessionStorage.getItem("storeId").trim();
+				let userId = sessionStorage.getItem("userId").trim();
+				let totalPrice = document.getElementsByClassName("totalPrice")[0].innerText.trim();
+				let billAmount = 0;
+				let recievedAmount = $(".recievedAmount").val().trim();
+				let dis_Amount = document.getElementsByClassName("discountAmount")[0].innerText.trim();
+				let amountToReturn = parseInt($(".amountToReturn").text().trim().substr(5));
+
+				(amountToReturn == 0) ? amountToReturn = "-" : amountToReturn = amountToReturn;
+
+				let orderItems = [];
+
+				(totalPrice == "Rs : 000") ? totalPrice = 0 : totalPrice = parseInt(totalPrice.substr(4));
+
+				if (dis_Amount == "Rs : 0") {
+					dis_Amount = "-";
+					billAmount = totalPrice;
+				}
+				else {
+					dis_Amount = parseInt(dis_Amount.substr(4));
+					billAmount = (totalPrice - dis_Amount);
+				}
+
+				$(".POS_Table tbody tr").each(function () {
+					orderItems.push({
+						"itemid": $(this).attr("id"),
+						"quantity": $(this).find(".pQuantity").val()
+					});
+				})
+
+
+
+				if (customerId == "" || totalPrice == 0 || recievedAmount == "") {
+					$(".modalNotify2").html(`
+						<div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-size:1.2em">
+							<strong>All Fields</strong> Are Required!.
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						`)
+				} else {
+
+					// LOADING DATA IN PRINT TABLE
+
+					$(".Store_Name").text(storeName);
+					$(".Store_Location").text(storeLocation);
+					$(".Customer_Id").text("Customer Id " + $("#registerCustomers").val());
+					$(".User_Id").text("User Id " + sessionStorage.getItem("userId"));
+					$(".draftOrderBtn").removeAttr("disabled");
+
+					$("#orderTable tbody tr").each(function () {
+						$(".print_Table .order-details").append(`
+					<tr>	 
+						<td>${$(this).find(".PName").text()}</td>
+						<td class="text-center">${$(this).find(".pQuantity").val()}</td> 
+						<td>${$(this).find(".subTotal").text()}</td>
+					</tr>`)
+					})
+
+					$(".Total_Items").text($(".totalqty").text());
+					$(".Total_Discount").text(dis_Amount);
+					$(".Billed_Amount").text(billAmount);
+					$(".Amount_Recieved").text(recievedAmount);
+					$(".Change_Returned").text(amountToReturn);
+					// LOADING DATA IN PRINT TABLE END
+
+					let url = `https://api-thrive-thirst.000webhostapp.com/Orders.php?action=addorder&query=${customerId}|${storeId}|${userId}|${totalPrice}|${dis_Amount}|${billAmount}|${recievedAmount}|${amountToReturn}|${encodeURIComponent(JSON.stringify(orderItems))}`;
+					// let url = `http://localhost/PHP%20Codings/project/file1.php?action=addorder&query=${customerId}|${storeId}|${userId}|${totalPrice}|${dis_Amount}|${billAmount}|${recievedAmount}|${amountToReturn}|${encodeURIComponent(JSON.stringify(orderItems))}`;
+					// console.log(url);
+					$.ajax({
+						url: url,
+						cache: false,
+						success: (data) => {
+							// console.log(data)
+							// data = JSON.parse(data);
+							if (data['result']['message'] == "order save successfully!") {
+								$('.modalNotify2').html(`
+							    <div class= "alert alert-success alert-dismissible fade show" role = "alert" style = "font-size:1.2em" >
+							    <strong>Order Placed</strong> Successfully!
+							    <button type = "button" class= "close" data-dismiss="alert" aria-label="Close" >
+							        <span aria-hidden="true">&times;</span>
+							    </button>
+							`);
+								$(".POS_Table tbody").html('');
+								$(".totalPrice").text("Rs : 000");
+								$(".discountAmount").text("Rs : 0");
+								$(".grandTotal").text("Rs : 0");
+								$(".amountToReturn").text('');
+								$(".totalqty").text("0");
+							} else {
+								$('.modalNotify2').html(`
+							    <div class= "alert alert-danger alert-dismissible fade show" role = "alert" style = "font-size:1.2em" >
+							    <strong>Something Went</strong> Wrong!
+							    <button type = "button" class= "close" data-dismiss="alert" aria-label="Close" >
+							        <span aria-hidden="true">&times;</span>
+							    </button>
+							`);
+							}
+
+							setTimeout(() => {
+								$("button.draftOrderBtn").trigger("click");
+								$(".Total_Items").text('');
+								$(".Total_Discount").text('');
+								$(".Billed_Amount").text('');
+								$(".Amount_Recieved").text('');
+								$(".Change_Returned").text('');
+								$(".order-details").html('');
+								$("button[data-dismiss='modal']").trigger("click");
+								location.reload();
+							}, 1500);
+						},
+						error: (err) => console.log("err ==> ", err, "\nStatusText ==> " + err.statusText)
+
+					})
+				}
+				// console.log("totalPrice => " + totalPrice, "\nrecievedAmount => " + recievedAmount, "\nbillAmount =>" + billAmount,
+				// 	"\ndis_Amount =>" + dis_Amount, "\namountToReturn =>" + amountToReturn, "\ncustomerId =>" + customerId, "amountToReturn => " + amountToReturn)
+			})
+
+			//  HANDLIN PRINT ORDER BUTTON 
+			$(".draftOrderBtn").click(function () {
+
+				var newWin = window.open('', 'Print-Window');
+
+				newWin.document.open();
+
+				newWin.document.write(`<html><head><title>Print Order</title><style>td,th{text-align: center;}.table {width: 100%;}</style></head>
+				<body> 	${$("#Printable_Div").html()} </body></html>`);
+				newWin.print();
+				newWin.document.close();
+				setTimeout(function () { newWin.close(); }, 2000);
+			})
+
+			let username = sessionStorage.getItem("username");
+			(username != "undefined" && username != "") ? username = username : username = ""
+			$(".username").text(username);
+			$(".1stAlphabet").text((username) ? username.substr(0, 1) : username);
+
+		})
+
+	</script>
+</body>
+
+</html>
