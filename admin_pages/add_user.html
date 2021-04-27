@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+    <title>Thrive Thirst | Add User</title>
+    <meta name="description" content="Thrive Thirst">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="icon" href="../assets/img/favicon.png" type="image/png">
+
+    <link href="../assets/css/style.css" rel="stylesheet" type="text/css">
+
+    <link href="../assets/css/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" type="text/css" href="../assets/css/custom.css">
+
+    <script src="../assets/js/jquery.min.js"></script>
+
+    <script>
+        let username = sessionStorage.getItem("username");
+        if (username == null || username == undefined) window.location.href = "../index.html";
+    </script>
+</head>
+
+<body id="tc_body" class="header-fixed header-mobile-fixed subheader-enabled aside-enabled aside-fixed"
+    style="padding-right: 0px;">
+
+    <div class="se-pre-con loadergif d-none" aria-hidden="true">
+        <div class="pre-loader">
+            <img class="img-fluid" src="../assets/img/loadergif.gif" alt="loading">
+        </div>
+    </div>
+
+    <header class="pos-header bg-white" aria-hidden="true">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-xl-12">
+                    <h3 class="card-label font-weight-bold text-primary text-center">
+                        <i class="fa fa-user mx-2"></i> Admin
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="contentPOS">
+        <div class="container-fluid">
+            <div class="row customDiv">
+                <div class="col-lg-4 offset-lg-1 col-md-6 col-sm-12">
+                    <div class="card card-custom gutter-b bg-white border-0">
+                        <div class="card-body">
+                            <h3 class="card-label font-weight-bold text-primary text-center">
+                                <i class="fa fa-user-plus"></i> Add User
+                            </h3>
+                            <form style="font-size:1.2em">
+                                <div class="notify"></div>
+                                <div class="form-group">
+                                    <label for="username">Username</label>
+                                    <input type="text" class="form-control" id="username" placeholder="Enter Name..">
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password" class="form-control" id="password" placeholder="*********">
+                                </div>
+                                <div class="form-group">
+                                    <label for="user_role">Role</label>
+                                    <Select id="user_role" class="custom-select user_role">
+                                        <option value="user">User</option>
+                                        <option value="admin">Admin</option>
+                                        <option value="superadmin">Super Admin</option>
+                                    </Select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="store_id">Store's Name</label>
+                                    <Select id="store_id" class="custom-select store_id"></Select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="store_id">User Status</label> <br>
+                                    <label class="text-body" for="active">Active</label>
+                                    <input type="radio" name="user_status" class="Active" value="active" checked>
+                                    <label class="text-body" for="in-active">In-Active</label>
+                                    <input type="radio" name="user_status" class="In-Active" value="in-active">
+                                </div>
+                                <button type="submit" class="btn btn-primary col-sm-5 addUserBtn">
+                                    <i class="fa fa-user-plus mx-2"></i> Add User
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 offset-lg-2 col-md-6 col-sm-12">
+                    <div class="card card-custom gutter-b bg-white border-0">
+                        <div class="card-body" style="flex-grow: 0 !important;">
+                            <div class="d-flex">
+                                <input type="search" class="form-control searchField col-12"
+                                    style="font-size: 1.2em !important;" placeholder="Search Product..." />
+                            </div>
+                        </div>
+                        <div class="row pl-5 mb-2">
+                            <h3>User's Table</h3>
+                        </div>
+                        <div class="product-items">
+                            <div class="row">
+                                <table class="table dataTableUser">
+                                    <thead>
+                                        <tr>
+                                            <th>User Name</th>
+                                            <th>Role</th>
+                                            <th>Date Cretaed</th>
+                                            <th>Status</th>
+                                            <th>Edit</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- DATA WLL BE SHOWN BY JQUERY -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade text-left show" id="edit-user-popup" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel11" style="display: none; padding-right: 17px;" aria-modal="true">
+        <div class="modal-dialog modal-dialog-scrollable  modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="myModalLabel11">
+                        <i class="fa fa-edit mx-2"></i>Edit User
+                    </h3>
+                    <button type="button" class="close rounded-pill btn btn-sm btn-icon btn-light btn-hover-primary m-0"
+                        data-dismiss="modal" aria-label="Close">
+                        <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="modalNotify"></div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group row">
+                            <!-- <div class="col-md-12">
+                                <label class="text-body">Category Name</label>
+                                <div class="form-group mb-3">
+                                    <input type="text" class="form-control cat_name" value=""
+                                    placeholder="Category Name..">
+                                </div>
+                            </div> -->
+                            <!-- <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Store's Name</label>
+                                    <Select class="custom-select store_id"></Select>
+                                </div>
+                            </div> -->
+                            <div class="col-md-12 mt-3">
+                                <label class="text-body">User Status</label>
+                                <input type="hidden" class="user_id" />
+                                <input type="hidden" class="storeId" />
+                                <div class="form-group my-3">
+                                    <label class="text-body fa-lg" for="active">Active</label>
+                                    <input type="radio" name="edit_user_status" class="Active" value="active">
+                                    <label class="text-body fa-lg" for="in-active">In-Active</label>
+                                    <input type="radio" name="edit_user_status" class="In-Active" value="in-active">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-primary editUserBtn">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/bootstrap.bundle.min.js" aria-hidden="true"></script>
+    <script src="../assets/js/custom.js" aria-hidden="true"></script>
+</body>
+<script>
+    $(document).ready(() => {
+
+        let storeId = sessionStorage.getItem("storeId");
+
+        // GET STORE ACCORDING TO SPECIFIC STORE ID
+        $.ajax({
+            url: `https://api-thrive-thirst.000webhostapp.com/Dashboard.php?action=getstores&query=${storeId}`,
+            cache: false,
+            success: (data) => {
+                data['result']['stores'].map((store) => {
+                    $(".store_id").append(`<option value=${store['storeid']}>${store['name']}</option>`)
+                })
+            },
+            complete: () => {
+                $(".loadergif").hide()
+            },
+            error: (err) => console.log("err => " + err)
+        })
+
+        // FTECHING ALL USERS ACCORDING TO SPECIFIC STORE ID
+        $.ajax({
+            url: `https://api-thrive-thirst.000webhostapp.com/Users.php?action=getuser&query=${storeId}`,
+            cache: false,
+            success: (data) => {
+                data['result'].map((data) => {
+                    // console.log(data)
+                    data['users'].map((user) => {
+                        $(".dataTableUser tbody").append(`
+                    <tr>
+                        <input type="hidden" class="user-details" user-id="${user['userid']}" user-name="${user['name']}"
+                        user-role="${user['role']}" user-status="${user['status']}"  store-id="${data['storeid']}">
+                        <td class="cat_name">${user['name']}</td>
+                        <td class="cat_name">${user['role']}</td>
+                        <td class="cat_name">${user['datecreated']}</td>
+                        <td class="cat_name">
+                            <h6 class="badge-${user['status'] == 'active' ? 'success' : 'danger'}" style="width:fit-content;padding: 5px;border-radius: 2rem;font-size: 1.1em;">
+                                ${user['status']}
+                            </h6>
+                        </td>
+                        <td>
+                            <a class="editUser p-2 rounded-pill" role="button" data-toggle="modal" data-target="#edit-user-popup" style="background: radial-gradient(transparent,#c0c0c0);">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    `);
+                        // $(".store_id").append(`<option value=${store['storeid']}>${store['name']}</option>`)
+                    })
+                })
+            },
+            error: (err) => console.log("err => " + err)
+        })
+
+        // HANDLING ADD USER BUTTON
+        $('.addUserBtn').click(function (e) {
+            e.preventDefault();
+            let user_name = $("#username").val().trim();
+            let password = $("#password").val().trim();
+            let user_role = $("#user_role").val().trim();
+            let store_id = $(this).parent().find('.store_id').val().trim();
+            let user_status = $(this).parent().find("input[type='radio']:checked").val().trim();
+
+            // console.log(user_name, password, user_role, store_id, user_status);
+
+            if (user_name == "" || password == "" || user_role == "" || store_id == "" || user_status == "") {
+                $(".notify").html(`
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-size:1.2em">
+                <strong>All Fields</strong> are Required.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            `)
+            } else {
+                let mon = new Date();
+                mon = mon.getMonth();
+                if (mon == 0) mon = "01"; else if (mon == 1) mon = "02"; else if (mon == 2) mon = "03";
+                else if (mon == 3) mon = "04"; else if (mon == 4) mon = "05"; else if (mon == 5) mon = "06";
+                else if (mon == 6) mon = "07"; else if (mon == 7) mon = "08"; else if (mon == 8) mon = "09";
+                let datecreated = Date().substr(11, 4) + "-" + mon + "-" + Date().substr(8, 2) + " 00:00:00";
+
+                $.ajax({
+                    url: `https://api-thrive-thirst.000webhostapp.com/Users.php?action=adduser&query=${user_name}|${password}|${user_role}|${store_id}|${datecreated}|${user_status}`,
+                    type: "GET",
+                    cache: false,
+                    success: (data) => {
+                        // console.log(data)
+                        if (data['result']['message'] == "User created successfully!") {
+                            $(".notify").html(`
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert" style="font-size:1.2em">
+                                        <strong>Product</strong> Added Successfully!
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    `)
+                            setTimeout(() => {
+                                $("button[aria-label='Close']").trigger("click");
+                                location.reload();
+                            }, 1500);
+                        } else {
+                            $(".notify").html(`
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-size:1.2em">
+                                        <strong>Something</strong> Went Wrong!
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    `)
+                        }
+                    },
+                    error: (err) => console.log("err => " + err)
+                })
+
+            }
+
+        })
+
+        // LOADING DATA INTO EDIT USER MODAL
+        $(document).on("click", ".editUser", function (e) {
+            // e.preventDefault();
+            let user_id = $(this).parent().parent().find('.user-details').attr('user-id').trim();
+            // let user_name = $(this).parent().parent().find('.user-details').attr('user-name').trim();
+            // let user_role = $(this).parent().parent().find('.user-details').attr('user-role').trim();
+            let user_status = $(this).parent().parent().find('.user-details').attr('user-status').trim();
+            let store_id = $(this).parent().parent().find('.user-details').attr('store-id').trim();
+            $(".user_id").val(user_id);
+            $("input.storeId").val(store_id);
+
+            ($("input[name='edit_user_status']").val() == user_status)
+                ? $("input[name='edit_user_status'].Active").attr('checked', 'checked') : $("input[name='edit_user_status'].In-Active").attr('checked', 'checked');
+            // console.log(user_id, user_status);
+        })
+
+        // HANDLING EDIT USER BUTTON
+        $(document).on("click", ".editUserBtn", function (e) {
+            e.preventDefault();
+            let user_status = $(this).parent().parent().parent().find('input[type="radio"]:checked').val().trim();
+            let user_id = $(".user_id").val().trim();
+            let store_id = $("input.storeId").val().trim();
+            let editUserUrl;
+            if (user_status == "active") {
+                editUserUrl = `https://api-thrive-thirst.000webhostapp.com/Users.php?action=activateuser&query=${user_id}`;
+            } else {
+                editUserUrl = `https://api-thrive-thirst.000webhostapp.com/Users.php?action=deactivateuser&query=${user_id}`;
+            }
+            // console.log(user_id, user_status, store_id);
+
+            if (user_id == "" || user_status == "" || store_id == "") {
+                $(".modalNotify").html(`
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-size:1.2em">
+                <strong>All Fields</strong> Are Required.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            `)
+            } else {
+                $.ajax({
+                    url: editUserUrl,
+                    cache: false,
+                    success: (data) => {
+                        if (data['result']['message']) {
+                            $(".modalNotify").html(`
+                                <div class="alert alert-success alert-dismissible fade show" role="alert" style="font-size:1.2em">
+                                    <strong>${data['result']['message']}</strong>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                `)
+                            setTimeout(() => {
+                                $("button[aria-label='Close']").trigger("click");
+                                location.reload();
+                            }, 1500);
+                        } else {
+                            $(".modalNotify").html(`
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-size:1.2em">
+                                    <strong>Something Went</strong> Wrong
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                `)
+                        }
+                        setTimeout(() => {
+                            $("button[data-dismiss='modal']").trigger("click");
+                            location.reload();
+                        }, 1500);
+                    },
+                    error: (err) => console.log("err =>" + err)
+                })
+            }
+        })
+
+    })
+
+</script>
+
+</html>
