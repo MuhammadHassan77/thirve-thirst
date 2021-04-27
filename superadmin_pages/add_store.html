@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+    <title>Thrive Thirst | Add Store</title>
+    <meta name="description" content="Thrive Thirst">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="icon" href="../assets/img/favicon.png" type="image/png">
+
+    <link href="../assets/css/style.css" rel="stylesheet" type="text/css">
+
+    <link href="../assets/css/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" type="text/css" href="../assets/css/custom.css">
+
+    <script src="../assets/js/jquery.min.js"></script>
+
+    <script>
+        let username = sessionStorage.getItem("username");
+        if (username == null || username == undefined) window.location.href = "../index.html";
+    </script>
+</head>
+
+<body id="tc_body" class="header-fixed header-mobile-fixed subheader-enabled aside-enabled aside-fixed"
+    style="padding-right: 0px;">
+
+    <div class="se-pre-con loadergif" aria-hidden="true">
+        <div class="pre-loader">
+            <img class="img-fluid" src="../assets/img/loadergif.gif" alt="loading">
+        </div>
+    </div>
+
+    <header class="pos-header bg-white" aria-hidden="true">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-xl-12">
+                    <h3 class="card-label font-weight-bold text-primary text-center">
+                        <i class="fa fa-user mx-2"></i> Admin
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="contentPOS">
+        <div class="container-fluid">
+            <div class="row customDiv">
+                <div class="col-lg-4 offset-lg-1 col-md-6 col-sm-12">
+                    <div class="card card-custom gutter-b bg-white border-0">
+                        <div class="card-body">
+                            <h3 class="card-label font-weight-bold text-primary text-center">
+                                <i class="fa fa-store"></i><i class="fa fa-plus" style="font-size: 0.5em;"></i> Add
+                                Store
+                            </h3>
+                            <form style="font-size:1.2em">
+                                <div class="notify"></div>
+                                <div class="form-group">
+                                    <label for="store_name">Store's Name</label>
+                                    <input type="text" class="form-control" id="store_name"
+                                        placeholder="Enter Store's Name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="store_location">Store's Location</label>
+                                    <input type="text" class="form-control" id="store_location"
+                                        placeholder="Enter Store's Location">
+                                </div>
+                                <div class="form-group">
+                                    <label for="store_id">Store's Name</label> <br>
+                                    <label class="text-body" for="active">Active</label>
+                                    <input type="radio" name="pro_status" class="Active" value="active" checked>
+                                    <label class="text-body" for="in-active">In-Active</label>
+                                    <input type="radio" name="pro_status" class="In-Active" value="in-active">
+                                </div>
+                                <button type="submit" class="btn btn-primary col-sm-5 addStoreBtn">
+                                    <i class="fa fa-store"></i><i class="fa fa-plus mr-2" style="font-size: 0.5em;"></i>
+                                    Add Store
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 offset-lg-1 col-md-6 col-sm-12">
+                    <div class="card card-custom gutter-b bg-white border-0">
+                        <div class="card-body" style="flex-grow: 0 !important;">
+                            <div class="d-flex">
+                                <input type="search" class="form-control searchField col-12"
+                                    style="font-size: 1.2em !important;" placeholder="Search Product..." />
+                            </div>
+                        </div>
+                        <div class="row pl-5 mb-2">
+                            <h3>Product's Table</h3>
+                        </div>
+                        <div class="product-items">
+                            <div class="row">
+                                <table class="table dataTableStore">
+                                    <thead>
+                                        <tr>
+                                            <th>Store Name</th>
+                                            <th>Store Location</th>
+                                            <th>Status</th>
+                                            <th>Edit</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- DATA WLL BE SHOWN BY JQUERY -->
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade text-left show" id="edit-store-popup" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel11" style="display: none; padding-right: 17px;" aria-modal="true">
+        <div class="modal-dialog modal-dialog-scrollable  modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="myModalLabel11">
+                        <i class="fa fa-edit mx-2"></i>Edit Store
+                    </h3>
+                    <button type="button" class="close rounded-pill btn btn-sm btn-icon btn-light btn-hover-primary m-0"
+                        data-dismiss="modal" aria-label="Close">
+                        <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="modalNotify"></div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group row">
+                            <!-- <div class="col-md-12">
+                                <label class="text-body">Store's Name</label>
+                                <div class="form-group mb-3">
+                                    <input type="text" class="form-control store_name" placeholder="Store's Name..">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="text-body">Store's Location</label>
+                                <div class="form-group mb-3">
+                                    <input type="text" class="form-control store_location"
+                                        placeholder="Store's Location">
+                                </div>
+                            </div> -->
+                            <div class="col-md-12 mt-3">
+                                <label class="text-body">Store's Status</label> <br>
+                                <input type="hidden" class="store_id">
+                                <div class="form-group my-3 storeRadio">
+                                    <label class="text-body fa-lg" for="active">Active</label>
+                                    <input type="radio" name="store_status" class="Active" value="active">
+                                    <label class="text-body fa-lg" for="in-active">In-Active</label>
+                                    <input type="radio" name="store_status" class="In-Active" value="in-active">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-primary editstoreBtn">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/bootstrap.bundle.min.js" aria-hidden="true"></script>
+    <script src="../assets/js/custom.js" aria-hidden="true"></script>
+</body>
+<script>
+
+    $(document).ready(() => {
+
+        // let storeId = sessionStorage.getItem("storeId");
+
+        $.ajax({
+            url: `https://api-thrive-thirst.000webhostapp.com/Dashboard.php?action=getstores&query=-`,
+            cache: false,
+            success: (data) => {
+                data['result']['stores'].map((store) => {
+                    $(".store_id").append(`<option value=${store['storeid']}>${store['name']}</option>`);
+
+                    $(".dataTableStore tbody").append(`
+                    <tr>
+                        <input type="hidden" class="store-details" store-id="${store['storeid']}"
+                                store-name="${store['name']}" store-location="${store['location']}"
+                                store-status="${store['status']}">
+                        <td>${store['name']}</td>
+                        <td>${store['location']}</td>
+                        <td>
+                            <h6 class="badge-${store['status'] == 'active' ? 'success' : 'danger'}" style="width:fit-content;padding: 5px;border-radius: 2rem;font-size: 1.1em;">
+                                ${store['status']}
+                            </h6>
+                        </td>
+                        <td>
+                            <a class="editStore p-2 rounded-pill" role="button" data-toggle="modal" data-target="#edit-store-popup" style="background: radial-gradient(transparent,#c0c0c0);">
+                                <i class="fa fa-wrench"></i>
+                            </a>    
+                        </td>
+                    </tr>
+                    `);
+                })
+            },
+            complete: () => {
+                $(".loadergif").hide()
+            },
+            error: (err) => console.log("err => " + err)
+        })
+
+        // LOADING STORE DATA IN EDIT STORE MODAL
+        $(document).on("click", ".editStore", function () {
+            // let store_name = $(this).parent().parent().find(".store-details").attr('store-name');
+            // let store_location = $(this).parent().parent().find(".store-details").attr('store-location');
+            // $("input.store_name").val(store_name);
+            // $("input.store_location").val(store_location);
+            let store_id = $(this).parent().parent().find(".store-details").attr('store-id');
+            $(".store_id").val(store_id);
+
+            let store_status = $(this).parent().parent().find(".store-details").attr('store-status');
+            ($(".storeRadio input[name='store_status']").val() == store_status)
+                ? $(".storeRadio input.Active").attr('checked', 'checked') : $(".storeRadio input.In-Active").attr('checked', 'checked')
+        })
+
+        // HANDLING EDIT STORE SUBMIT BUTTTON
+        $(document).on("click", ".editstoreBtn", function (e) {
+            e.preventDefault();
+
+            // let store_name = $("input.store_name").val().trim();
+            // let store_location = $("input.store_location").val().trim();
+            let store_id = $("input.store_id").val().trim();
+            let store_status = $(".storeRadio input[checked='checked']").val().trim();
+            let editStoreUrl;
+
+            if (store_status == "active") {
+                editStoreUrl = `https://api-thrive-thirst.000webhostapp.com/Stores.php?action=activatestore&query=${store_id}`;
+            } else {
+                editStoreUrl = `https://api-thrive-thirst.000webhostapp.com/Stores.php?action=deactivatestore&query=${store_id}`;
+            }
+            // console.log(store_id, store_status, editStoreUrl);
+
+            if (store_id == "" || store_status == "") {
+                $('.modalNotify').html(`
+                        <div class= "alert alert-danger alert-dismissible fade show" role = "alert" style = "font-size:1.2em" >
+                        <strong>All Fields</strong> are Required.
+                        <button type = "button" class= "close" data-dismiss="alert" aria-label="Close" >
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    `);
+            } else {
+                $.ajax({
+                    url: editStoreUrl,
+                    cache: false,
+                    success: (data) => {
+
+                        if (data['result']['message']) {
+                            // console.log(data['result']['message'].search("activated"))
+                            $('.modalNotify').html(`
+                                <div class="alert alert-success alert-dismissible fade show" role="alert" style="font-size:1.2em">
+                                    <strong>${data['result']['message']}</strong>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                        `);
+                            setTimeout(() => {
+                                $("button[aria-label='Close']").trigger("click");
+                                location.reload();
+                            }, 1500);
+                        }
+                        else {
+                            $('.modalNotify').html(`
+                                <div class="alert alert-success alert-dismissible fade show" role="alert" style="font-size:1.2em">
+                                    <strong>Something Went</strong> Wrong
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                    `);
+                        }
+                        setTimeout(() => {
+                            $("button[data-dismiss='modal']").trigger("click");
+                            location.reload();
+                        }, 1500);
+                    }, error: (err) => console.log("err ==> ", err)
+                })
+            }
+        })
+
+        // HANLING ADD STORE BUTTON
+        $(document).on("click", ".addStoreBtn", function (e) {
+            e.preventDefault();
+            let store_name = $("#store_name").val().trim();
+            let store_location = $("#store_location").val().trim();
+            let store_status = $(this).parent().find("input[type='radio']:checked").val().trim();
+            // console.log(store_name, store_location, store_status);
+            if (store_name == "" || store_location == "" || store_status == "") {
+                $(".notify").html(`
+                    <div class= "alert alert-danger alert-dismissible fade show" role = "alert" style = "font-size:1.2em" >
+                        <strong>All Fields</strong> are Required.
+                        <button type = "button" class= "close" data-dismiss="alert" aria-label="Close" >
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        `);
+            } else {
+                $.ajax({
+                    url: `https://api-thrive-thirst.000webhostapp.com/Stores.php?action=addstore&query=${store_name}|${store_location}|${store_status}`,
+                    cache: false,
+                    success: (data) => {
+                        if (data['result']['message'] == "store created successfully!") {
+                            $(".notify").html(`
+                        <div class= "alert alert-success alert-dismissible fade show" role = "alert" style = "font-size:1.2em" >
+                            <strong>Store Created</strong> Successfully!.
+                            <button type = "button" class= "close" data-dismiss="alert" aria-label="Close" >
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        `);
+                            setTimeout(() => {
+                                $("button[aria-label='Close']").trigger("click");
+                                location.reload();
+                            }, 1500);
+                        } else {
+                            $(".notify").html(`
+                        <div class= "alert alert-danger alert-dismissible fade show" role = "alert" style = "font-size:1.2em" >
+                            <strong>Something Went</strong> Wrong.
+                            <button type = "button" class= "close" data-dismiss="alert" aria-label="Close" >
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        `);
+                        }
+                    },
+                    error: (err) => console.log("err =>" + err)
+                })
+            }
+        })
+
+    })
+
+
+</script>
+
+</html>
