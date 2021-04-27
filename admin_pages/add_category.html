@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+    <title>Thrive Thirst | Add Category</title>
+    <meta name="description" content="Thrive Thirst">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="icon" href="../assets/img/favicon.png" type="image/png">
+
+    <link href="../assets/css/style.css" rel="stylesheet" type="text/css">
+
+    <link href="../assets/css/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" type="text/css" href="../assets/css/custom.css">
+
+    <script src="../assets/js/jquery.min.js"></script>
+
+    <script>
+        let username = sessionStorage.getItem("username");
+        if (username == null || username == undefined) window.location.href = "../index.html";
+    </script>
+</head>
+
+<body id="tc_body" class="header-fixed header-mobile-fixed subheader-enabled aside-enabled aside-fixed"
+    style="padding-right: 0px;">
+
+    <div class="se-pre-con loadergif" aria-hidden="true">
+        <div class="pre-loader">
+            <img class="img-fluid" src="../assets/img/loadergif.gif" alt="loading">
+        </div>
+    </div>
+
+    <header class="pos-header bg-white" aria-hidden="true">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-xl-12">
+                    <h3 class="card-label font-weight-bold text-primary text-center">
+                        <i class="fa fa-user mx-2"></i> Admin
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="contentPOS">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-4 offset-lg-2 col-md-6 col-sm-12">
+                    <div class="card card-custom gutter-b bg-white border-0">
+                        <div class="card-body">
+                            <h3 class="card-label font-weight-bold text-primary text-center">
+                                <i class="fa fa-list-ul"></i><i class="fa fa-plus" style="font-size: 0.5em;"></i> Add
+                                Category
+                            </h3>
+                            <form style="font-size:1.2em">
+                                <div class="notify1"></div>
+                                <div class="form-group">
+                                    <label for="pCategory">Category's Name</label>
+                                    <input type="text" class="form-control" id="pCategory"
+                                        placeholder="Enter Category's Name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Store's Name</label>
+                                    <Select class="custom-select store_id"></Select>
+                                </div>
+                                <button type="submit" class="btn btn-primary col-sm-5 addCategoryBtn">
+                                    <i class="fa fa-list-ul mx-2"></i> Add Category
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-4 offset-lg-2 col-md-6 col-sm-12">
+                    <div class="card card-custom gutter-b bg-white border-0">
+                        <div class="row pl-5 mb-2">
+                            <h3>Categories's Table</h3>
+                        </div>
+                        <div class="product-items">
+                            <div class="row">
+                                <table class="table dataTableCategory">
+                                    <thead>
+                                        <tr>
+                                            <th>Category Name</th>
+                                            <th>Edit</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- DATA WLL BE SHOWN BY JQUERY -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade text-left show" id="edit-category-popup" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel11" style="display: none; padding-right: 17px;" aria-modal="true">
+        <div class="modal-dialog modal-dialog-scrollable  modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="myModalLabel11">
+                        <i class="fa fa-edit mx-2"></i>Edit Category
+                    </h3>
+                    <button type="button" class="close rounded-pill btn btn-sm btn-icon btn-light btn-hover-primary m-0"
+                        data-dismiss="modal" aria-label="Close">
+                        <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="modalNotify"></div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <label class="text-body">Category Name</label>
+                                <div class="form-group mb-3">
+                                    <input type="hidden" class="cat_id" />
+                                    <input type="text" class="form-control cat_name" value=""
+                                        placeholder="Category Name..">
+                                </div>
+                            </div>
+                            <!-- <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Store's Name</label>
+                                    <Select class="custom-select store_id"></Select>
+                                </div>
+                            </div> -->
+                            <!-- <div class="col-md-12 mt-3">
+                                <label class="text-body">Product Status</label> <br>
+                                <label class="text-body pro_status"></label>
+                                <div class="form-group my-3">
+                                    <label class="text-body fa-lg" for="active">Active</label>
+                                    <input type="radio" name="pro_status" class="Active" value="active">
+                                    <label class="text-body fa-lg" for="in-active">In-Active</label>
+                                    <input type="radio" name="pro_status" class="In-Active" value="in-active">
+                                </div>
+                            </div> -->
+                        </div>
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-primary editCategoryBtn">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="../assets/js/bootstrap.bundle.min.js" aria-hidden="true"></script>
+    <script src="../assets/js/custom.js" aria-hidden="true"></script>
+</body>
+<script>
+
+    $(document).ready(() => {
+
+        let storeId = sessionStorage.getItem("storeId");
+
+        // FTECHING ALL STORES
+        $.ajax({
+            url: `https://api-thrive-thirst.000webhostapp.com/Dashboard.php?action=getstores&query=${storeId}`,
+            cache: false,
+            success: (data) => {
+                data['result']['stores'].map((store) => {
+                    $(".store_id").append(`<option value=${store['storeid']}>${store['name']}</option>`)
+                })
+            },
+            complete: () => {
+                $(".loadergif").hide()
+            },
+            error: (err) => console.log("err => " + err)
+        })
+
+        // FTECHING ALL CATEGORIES
+        $.ajax({
+            url: `https://api-thrive-thirst.000webhostapp.com/Products.php?action=getcategoriesinstore&query=${storeId}`,
+            cache: false,
+            success: (data) => {
+                data['result'].map((data) => {
+                    // console.log(data['storeid'])
+
+                    data['categories'].map((category) => {
+                        // console.log(category);
+                        $(".dataTableCategory tbody").append(`
+                    <tr>
+                    <input type="hidden" class="cat-details" cat-id="${category['cid']}" cat-name="${category['cname']}"
+                     store-id="${data['storeid']}">
+                    <td class="cat_name">${category['cname']}</td>
+                    <td>
+                        <a class="editCategory p-2 rounded-pill" role="button" data-toggle="modal" data-target="#edit-category-popup" style="background: radial-gradient(transparent,#c0c0c0);">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                    </td>
+                    </tr>
+                    `);
+                        // $(".store_id").append(`<option value=${store['storeid']}>${store['name']}</option>`)
+                    })
+                })
+            },
+            complete: () => {
+                $(".loadergif").hide()
+            },
+            error: (err) => console.log("err => " + err)
+        })
+
+        // HANDLING ADD CATEGORY BUTTON
+        $(".addCategoryBtn").click(function (e) {
+            e.preventDefault();
+            let catName = $("#pCategory").val().trim();
+            let storeId = $(this).parent().find(".store_id").val().trim();
+            // console.log($(this), storeId);
+            if (catName == "" || storeName == "") {
+                $(".notify1").html(`
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-size:1.2em">
+                <strong>All Fields</strong> Are Required.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            `)
+            } else {
+                $.ajax({
+                    url: `https://api-thrive-thirst.000webhostapp.com/Products.php?action=addcategory&query=${catName}|${storeId}`,
+                    cache: false,
+                    success: (data) => {
+                        console.log(data)
+                        if (data['result']['message'] == "Category added successfully!") {
+                            $(".notify1").html(`
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert" style="font-size:1.2em">
+                                        <strong>Category</strong> Added Successfully!
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    `)
+                            setTimeout(() => {
+                                $("button[aria-label='Close']").trigger("click");
+                                location.reload();
+                            }, 1500);
+                        } else {
+                            $(".notify").html(`
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-size:1.2em">
+                                        <strong>Something</strong> Went Wrong!
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    `)
+                        }
+                    },
+                    error: (err) => console.log("err ==>" + err)
+                })
+            }
+        })
+
+        // LOADING DATA IN EDIT CATEGORY MODAL
+        $(document).on("click", ".editCategory", function () {
+            let cat_id = $(this).parent().parent().find(".cat-details").attr('cat-id').trim();
+            let cat_name = $(this).parent().parent().find(".cat-details").attr('cat-name').trim();
+            // let storeId = $(this).parent().parent().find(".cat-details").attr('store-id').trim();
+            // console.log($(this), cat_id, cat_name);
+            $("input[type='hidden'].cat_id").val(cat_id);
+            $(".cat_name").val(cat_name);
+        })
+
+        // HANDLING EDIT CATEGORY BUTTON
+        $(document).on("click", ".editCategoryBtn", function (e) {
+            e.preventDefault();
+            let cat_id = $(this).parent().parent().parent().find('.cat_id').val().trim();
+            let cat_name = $(this).parent().parent().parent().find('.cat_name').val().trim();
+            // console.log($(this), cat_id, cat_name);
+
+            if (cat_id == "" || cat_name == "") {
+                $(".modalNotify").html(`
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-size:1.2em">
+                <strong>All Fields</strong> Are Required.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            `)
+            } else {
+                $.ajax({
+                    url: `https://api-thrive-thirst.000webhostapp.com/Products.php?action=editcategory&query=${cat_id}|${cat_name}`,
+                    cache: false,
+                    success: (data) => {
+                        // console.log(data)
+                        if (data['result']['message'] == "Category updated successfully!") {
+                            $(".modalNotify").html(`
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert" style="font-size:1.2em">
+                                        <strong>Category Updated</strong>  Successfully!
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    `)
+                            setTimeout(() => {
+                                $("button[aria-label='Close']").trigger("click");
+                                location.reload();
+                            }, 1500);
+                        } else {
+                            $(".modalNotify").html(`
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-size:1.2em">
+                                        <strong>Something</strong> Went Wrong!
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    `)
+                        }
+                        setTimeout(() => {
+                            $("button[data-dismiss='modal']").trigger("click");
+                            location.reload();
+                        }, 1500);
+                    },
+                    error: (err) => console.log("err ==>" + err)
+                })
+            }
+        })
+
+
+    })
+
+</script>
+
+</html>
